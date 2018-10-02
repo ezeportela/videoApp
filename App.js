@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { 
   View,
   Text 
@@ -10,7 +10,11 @@ import CategoryList from './src/videos/containers/category-list'
 import MoviesAPI from './utils/api'
 import Player from './src/player/containers/player'
 
-export default class App extends React.Component {
+import { Provider } from 'react-redux'
+import store from './store'
+
+type Props = {};
+export default class App extends Component<Props> {
   
   state = {
     suggestionList: [],
@@ -29,17 +33,21 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <Home>
+      <Provider
+        store={ store }
+      >
+        <Home>
 
-        <Header />
-        <Text>Buscador</Text>
+          <Header />
+          <Text>Buscador</Text>
 
-        <Player />        
+          <Player />        
 
-        <CategoryList list={this.state.categories} />
+          <CategoryList list={this.state.categories} />
 
-        <SuggestionList list={this.state.suggestionList} />
-      </Home>
-    );
+          <SuggestionList list={this.state.suggestionList} />
+        </Home>
+      </Provider>
+    )
   }
 }
