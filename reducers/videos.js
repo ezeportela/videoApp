@@ -1,5 +1,5 @@
 const videos = (state = {}, action) => {
-  return state
+  return {...state, ...action.payload}
 }
 
 export default videos
